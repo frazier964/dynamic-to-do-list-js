@@ -5,7 +5,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
-    
+
+     loadTasks();
+
+    // Add event listeners for adding tasks
+    addButton.addEventListener('click', () => addTask(taskInput.value));
+    taskInput.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            addTask(taskInput.value);
+        }
+    });
     function addTask() {
         const taskText = taskInput.value.trim();
 
