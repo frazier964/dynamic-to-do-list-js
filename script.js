@@ -19,6 +19,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
     function addTask() {
+         const taskList = document.getElementById('task-list');
+    const li = document.createElement('li');
+    li.textContent = taskText;
+
+    // ✅ Add class to li if needed for styling
+    li.classList.add('task-item');
         const taskText = taskInput.value.trim();
  if (save) {
         // ✅ Get existing tasks
