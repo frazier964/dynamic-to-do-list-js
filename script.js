@@ -13,12 +13,40 @@ document.addEventListener('DOMContentLoaded', function () {
     taskInput.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
             addTask(taskInput.value);
+            localStorage.setItem('tasks', JSON.stringify(storedTasks));
+
              const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
         }
     });
     function addTask() {
         const taskText = taskInput.value.trim();
+ if (save) {
+        // ✅ Get existing tasks
+        const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
 
+        // ✅ Add new task
+        storedTasks.push(taskText);
+
+        // ✅ Save updated tasks using JSON.stringify
+        localStorage.setItem('tasks', JSON.stringify(storedTasks));
+    }
+}
+
+function loadTasks() {
+    const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+
+    storedTasks.forEach(taskText => addTask(taskText, false));
+}
+
+function removeTaskFromStorage(taskText) {
+    let storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+
+    // Remove the task
+    storedTasks = storedTasks.filter(task => task !== taskText);
+
+    // ✅ Save updated list using JSON.stringify
+    localStorage.setItem('tasks', JSON.stringify(storedTasks));
+}
         
         if (taskText === '') {
             alert('Please enter a task.');
