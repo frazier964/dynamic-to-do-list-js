@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     taskInput.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
             addTask(taskInput.value);
+             const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
         }
     });
     function addTask() {
